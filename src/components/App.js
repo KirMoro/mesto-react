@@ -1,27 +1,16 @@
-import logo from './logo.svg';
-import './pages/index.css';
+import '../pages/index.css';
+import { Header } from './Header';
+import { Main } from './Main';
+import { Footer } from "./Footer";
 
 function App() {
   return (
-      <body className="page">
-      <header className="header">
-        <div className="header__logo"></div>
-      </header>
-      <main className="content">
-        <section className="profile">
-          <div className="profile__avatar"></div>
-          <button type="button" className="profile__edit-avatar-button" aria-label="Редактировать"></button>
-          <h1 className="profile__title"></h1>
-          <p className="profile__subtitle"></p>
-          <button type="button" className="profile__edit-button" aria-label="Редактировать"></button>
-          <button type="button" className="profile__add-button" aria-label="Добавить"></button>
-        </section>
-        <section className="elements" aria-label="Галерея"></section>
-        <footer className="footer">
-          <p className="footer__copyright">© 2022 Mesto Russia</p>
-        </footer>
-      </main>
-      <div className="popup popup_type_edit">
+      <div className="page">
+        <Header/>
+        <Main/>
+        <Footer/>
+
+        <div className="popup popup_type_edit">
         <div className="popup__container">
           <h3 className="popup__title">Редактировать профиль</h3>
           <form name="form-edit" className="form form_type_edit" noValidate>
@@ -109,7 +98,7 @@ function App() {
           <button type="button" className="elements__trash-button" aria-label="Корзина"></button>
         </article>
       </template>
-      </body>
+      </div>
   );
 }
 
