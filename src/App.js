@@ -1,15 +1,15 @@
 import logo from './logo.svg';
-import './App.css';
+import './pages/index.css';
 
 function App() {
   return (
-      <div className="page">
+      <body className="page">
       <header className="header">
-        <img src="<%=require('./images/header-logo.svg')%>" className="header__logo" alt="Логотип"/>
+        <div className="header__logo"></div>
       </header>
       <main className="content">
         <section className="profile">
-          <img src="" className="profile__avatar" alt="Аватарка"/>
+          <div className="profile__avatar"></div>
           <button type="button" className="profile__edit-avatar-button" aria-label="Редактировать"></button>
           <h1 className="profile__title"></h1>
           <p className="profile__subtitle"></p>
@@ -109,7 +109,7 @@ function App() {
           <button type="button" className="elements__trash-button" aria-label="Корзина"></button>
         </article>
       </template>
-      </div>
+      </body>
   );
 }
 
