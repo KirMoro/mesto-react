@@ -2,37 +2,58 @@ import '../pages/index.css';
 import {Header} from './Header';
 import {Main} from './Main';
 import {Footer} from "./Footer";
+import {PopupWithForm} from "./PopupWithForm";
 
 function App() {
+
+    let isEditProfilePopupOpen = '';
+    let isAddPlacePopupOpen = '';
+    let isEditAvatarPopupOpen = '';
+
+    const handleEditAvatarClick = () => {
+        return isEditAvatarPopupOpen = true;
+    }
+    const handleEditProfileClick = () => {
+        return isEditProfilePopupOpen = true;
+    }
+
+    const handleAddPlaceClick = () => {
+        return isAddPlacePopupOpen = true;
+    }
+
     return (
         <div className="page">
             <Header/>
-            <Main/>
+            <Main
+                onEditProfile = {handleEditProfileClick}
+                onAddPlace = {handleAddPlaceClick}
+                onEditAvatar = {handleEditAvatarClick}
+            />
             <Footer/>
-            <div className="popup popup_type_edit">
-                <div className="popup__container">
-                    <h3 className="popup__title">Редактировать профиль</h3>
-                    <form name="form-edit" className="form form_type_edit" noValidate>
-                        <fieldset className="form__fields">
-                            <label className="form__input">
-                                <input id="name-input" type="text" name="name" placeholder="Имя"
-                                       className="form__field form__field_type_name"
-                                       minLength="2" maxLength="40" required/>
-                                <span className="form__field-error name-input-error"></span>
-                            </label>
-                            <label className="form__input">
-                                <input id="about-input" type="text" name="about" placeholder="О себе"
-                                       className="form__field form__field_type_about" minLength="2" maxLength="200"
-                                       required/>
-                                <span className="form__field-error about-input-error"></span>
-                            </label>
-                            <button type='submit' className="form__submit-button" aria-label="Сохранить">Сохранить
-                            </button>
-                        </fieldset>
-                    </form>
-                    <button type="button" className="popup__close-button" aria-label="Закрыть"></button>
-                </div>
-            </div>
+
+            <PopupWithForm
+                name="Редактировать профиль"
+                title="edit"
+                isOpen={isEditProfilePopupOpen}
+            >
+                <fieldset className="form__fields">
+                    <label className="form__input">
+                        <input id="name-input" type="text" name="name" placeholder="Имя"
+                               className="form__field form__field_type_name"
+                               minLength="2" maxLength="40" required/>
+                        <span className="form__field-error name-input-error"></span>
+                    </label>
+                    <label className="form__input">
+                        <input id="about-input" type="text" name="about" placeholder="О себе"
+                               className="form__field form__field_type_about" minLength="2" maxLength="200"
+                               required/>
+                        <span className="form__field-error about-input-error"></span>
+                    </label>
+                    <button type='submit' className="form__submit-button" aria-label="Сохранить">Сохранить
+                    </button>
+                </fieldset>
+            </PopupWithForm>
+
             <div className="popup popup_type_add">
                 <div className="popup__container">
                     <h3 className="popup__title">Новое место</h3>
