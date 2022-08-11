@@ -1,4 +1,4 @@
-export default class Api {
+class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
@@ -57,3 +57,11 @@ export default class Api {
     return this._fetch(`cards/likes/${id}`, 'DELETE');
   }
 }
+
+export const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-48',
+  headers: {
+    authorization: '6dcd6a5f-9295-4e62-a1cd-62fe426f6415',
+    'Content-Type': 'application/json',
+  },
+});
