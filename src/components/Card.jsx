@@ -1,11 +1,15 @@
-export const Card = (card) => {
+export const Card = ({card, onCardClick}) => {
     const {
-        name, link, likes, _id
-    } = card.card;
+        name, link, likes
+    } = card;
+
+    function handleClick() {
+        onCardClick(link);
+    }
 
     return (
-        <article className="elements__item" key={_id}>
-            <img className="elements__image" src={link} alt={name}/>
+        <article className="elements__item">
+            <img className="elements__image" src={link} alt={name} onClick={() => handleClick()}/>
             <div className="elements__item-text">
                 <h2 className="elements__title">{name}</h2>
                 <button type="button" className="elements__like-button" aria-label="Понравилось"></button>

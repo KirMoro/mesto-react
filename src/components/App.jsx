@@ -3,20 +3,23 @@ import {Header} from './Header';
 import {Main} from './Main';
 import {Footer} from "./Footer";
 import {PopupWithForm} from "./PopupWithForm";
-import {useState} from "react";
 import {ImagePopup} from "./ImagePopup";
+import {useState} from "react";
 
 function App() {
     const [isEditProfilePopupOpen, handleEditProfileClick] = useState(false);
     const [isAddPlacePopupOpen, handleAddPlaceClick] = useState(false);
     const [isEditAvatarPopupOpen, handleEditAvatarClick] = useState(false);
     const [isConfirmPopupOpen, handleConfirmClick] = useState(false);
+    const [selectedCard, handleCardClick] = useState();
+
 
     const closeAllPopups = () => {
-        handleEditProfileClick(false)
-        handleAddPlaceClick(false)
-        handleEditAvatarClick(false)
-        handleConfirmClick(false)
+        handleEditProfileClick(false);
+        handleAddPlaceClick(false);
+        handleEditAvatarClick(false);
+        handleConfirmClick(false);
+        handleCardClick('', false);
     }
 
     return (
@@ -26,6 +29,7 @@ function App() {
                 onEditProfile={handleEditProfileClick}
                 onAddPlace={handleAddPlaceClick}
                 onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
             />
             <Footer/>
             <PopupWithForm
@@ -98,19 +102,11 @@ function App() {
                     <button type='submit' className="form__submit-button" aria-label="Да">Да</button>
                 </fieldset>
             </PopupWithForm>
-            <ImagePopup/>
+            <ImagePopup
+                card={selectedCard}
+                onClose={closeAllPopups}
+            />
 
-            <template id="item-template">
-                <article className="elements__item">
-                    <input type="image" className="elements__image" alt=""/>
-                    <div className="elements__item-text">
-                        <h2 className="elements__title"></h2>
-                        <button type="button" className="elements__like-button" aria-label="Понравилось"></button>
-                        <span className="elements__like-counter"></span>
-                    </div>
-                    <button type="button" className="elements__trash-button" aria-label="Корзина"></button>
-                </article>
-            </template>
         </div>);
 }
 

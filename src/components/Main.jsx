@@ -1,31 +1,25 @@
 import {api} from "../utils/api";
 import {Card} from "./Card";
-import {useState} from "react";
-import {useEffect} from "react";
+import {useState, useEffect} from "react";
 
-
-export const Main = ({ onEditProfile, onAddPlace, onEditAvatar }) => {
+export const Main = ({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) => {
     let [userName, setName] = useState();
     let [userDescription, setDescription] = useState();
     let [userAvatar, setAvatar] = useState();
     let [cards, setCards] = useState([]);
 
     useEffect(() => {
-        api.getProfileInfo()
-            .then((profile) => {
-                userName = setName(profile.name);
-                userDescription = setDescription(profile.about);
-                userAvatar = setAvatar(profile.avatar);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+        const initialPromises = Promise.all([
+            api.getProfileInfo(),
+            api.getInitialCards(),
+        ]);
 
-    useEffect(() => {
-        api.getInitialCards()
-            .then((cardsInfo) => {
-                cards = setCards(cardsInfo)
+        initialPromises
+            .then(([profile, cards]) => {
+                setName(profile.name);
+                setDescription(profile.about);
+                setAvatar(profile.avatar);
+                setCards(cards);
             })
             .catch((err) => {
                 console.log(err);
@@ -49,7 +43,9 @@ export const Main = ({ onEditProfile, onAddPlace, onEditAvatar }) => {
             <section className="elements" aria-label="Галерея">
                 {cards.map((card) => (
                     <Card
+                        key={(card._id)}
                         card={card}
+                        onCardClick={onCardClick}
                     />
                 ))}
             </section>
