@@ -32,13 +32,13 @@ export const Main = ({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) =
                 <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})`}}
                 ></div>
                 <button type="button" className="profile__edit-avatar-button" aria-label="Редактировать"
-                        onClick={() => onEditAvatar(true)}></button>
+                        onClick={onEditAvatar}></button>
                 <h1 className="profile__title">{userName}</h1>
                 <p className="profile__subtitle">{userDescription}</p>
                 <button type="button" className="profile__edit-button" aria-label="Редактировать"
-                        onClick={() => onEditProfile(true)}></button>
+                        onClick={onEditProfile}></button>
                 <button type="button" className="profile__add-button" aria-label="Добавить"
-                        onClick={() => onAddPlace(true)}></button>
+                        onClick={onAddPlace}></button>
             </section>
             <section className="elements" aria-label="Галерея">
                 {cards.map((card) => (

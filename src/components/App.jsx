@@ -7,19 +7,18 @@ import {ImagePopup} from "./ImagePopup";
 import {useState} from "react";
 
 function App() {
-    const [isEditProfilePopupOpen, handleEditProfileClick] = useState(false);
-    const [isAddPlacePopupOpen, handleAddPlaceClick] = useState(false);
-    const [isEditAvatarPopupOpen, handleEditAvatarClick] = useState(false);
-    const [isConfirmPopupOpen, handleConfirmClick] = useState(false);
+    const [isEditProfilePopupOpen, handleEditProfileClick] = useState();
+    const [isAddPlacePopupOpen, handleAddPlaceClick] = useState();
+    const [isEditAvatarPopupOpen, handleEditAvatarClick] = useState();
+    const [isConfirmPopupOpen, handleConfirmClick] = useState();
     const [selectedCard, handleCardClick] = useState();
 
-
     const closeAllPopups = () => {
-        handleEditProfileClick(false);
-        handleAddPlaceClick(false);
-        handleEditAvatarClick(false);
-        handleConfirmClick(false);
-        handleCardClick('', false);
+        handleEditProfileClick();
+        handleAddPlaceClick();
+        handleEditAvatarClick();
+        handleConfirmClick();
+        handleCardClick('');
     }
 
     return (
@@ -106,7 +105,6 @@ function App() {
                 card={selectedCard}
                 onClose={closeAllPopups}
             />
-
         </div>);
 }
 
