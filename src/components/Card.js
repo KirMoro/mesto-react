@@ -1,7 +1,4 @@
-export const Card = ({ card, onCardClick }) => {
-  const {
-    name, link, likes,
-  } = card;
+export const Card = ({ onCardClick, card: { name, link, likes } }) => {
 
   function handleClick() {
     onCardClick(link);

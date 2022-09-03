@@ -7,11 +7,11 @@ import { PopupWithForm } from './PopupWithForm.js';
 import { ImagePopup } from './ImagePopup.js';
 
 function App() {
-  const [isEditProfilePopupOpen, handleEditProfileClick] = useState();
-  const [isAddPlacePopupOpen, handleAddPlaceClick] = useState();
-  const [isEditAvatarPopupOpen, handleEditAvatarClick] = useState();
-  const [isConfirmPopupOpen, handleConfirmClick] = useState();
-  const [selectedCard, handleCardClick] = useState();
+  const [isEditProfilePopupOpen, handleEditProfileClick] = useState(false);
+  const [isAddPlacePopupOpen, handleAddPlaceClick] = useState(false);
+  const [isEditAvatarPopupOpen, handleEditAvatarClick] = useState(false);
+  const [isConfirmPopupOpen, handleConfirmClick] = useState(false);
+  const [selectedCard, handleCardClick] = useState(null);
 
   const closeAllPopups = () => {
     handleEditProfileClick();
@@ -36,6 +36,7 @@ function App() {
         title="Редактировать профиль"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        buttonText="Сохранить"
       >
         <fieldset className="form__fields">
           <label className="form__input">
@@ -64,9 +65,6 @@ function App() {
             />
             <span className="form__field-error about-input-error" />
           </label>
-          <button type="submit" className="form__submit-button" aria-label="Сохранить">
-            Сохранить
-          </button>
         </fieldset>
       </PopupWithForm>
       <PopupWithForm
@@ -74,6 +72,7 @@ function App() {
         title="Новое место"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
+        buttonText="Создать"
       >
         <fieldset className="form__fields">
           <label className="form__input">
@@ -100,7 +99,6 @@ function App() {
             />
             <span className="form__field-error url-input-error" />
           </label>
-          <button type="submit" className="form__submit-button" aria-label="Создать">Создать</button>
         </fieldset>
       </PopupWithForm>
       <PopupWithForm
@@ -108,6 +106,7 @@ function App() {
         title="Обновить аватар"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
+        buttonText="Сохранить"
       >
         <fieldset className="form__fields">
           <label className="form__input">
@@ -121,9 +120,6 @@ function App() {
             />
             <span className="form__field-error url-avatar-input-error" />
           </label>
-          <button type="submit" className="form__submit-button" aria-label="Сохранить">
-            Сохранить
-          </button>
         </fieldset>
       </PopupWithForm>
       <PopupWithForm
@@ -131,9 +127,9 @@ function App() {
         title="Вы уверены?"
         isOpen={isConfirmPopupOpen}
         onClose={closeAllPopups}
+        buttonText="Да"
       >
         <fieldset className="form__fields">
-          <button type="submit" className="form__submit-button" aria-label="Да">Да</button>
         </fieldset>
       </PopupWithForm>
       <ImagePopup

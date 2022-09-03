@@ -5,9 +5,9 @@ import { Card } from './Card';
 export const Main = ({
   onEditProfile, onAddPlace, onEditAvatar, onCardClick,
 }) => {
-  const [userName, setName] = useState();
-  const [userDescription, setDescription] = useState();
-  const [userAvatar, setAvatar] = useState();
+  const [userName, setName] = useState("");
+  const [userDescription, setDescription] = useState("");
+  const [userAvatar, setAvatar] = useState("");
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
