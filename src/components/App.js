@@ -14,11 +14,11 @@ function App() {
   const [selectedCard, handleCardClick] = useState(null);
 
   const closeAllPopups = () => {
-    handleEditProfileClick();
-    handleAddPlaceClick();
-    handleEditAvatarClick();
-    handleConfirmClick();
-    handleCardClick('');
+    handleEditProfileClick(false);
+    handleAddPlaceClick(false);
+    handleEditAvatarClick(false);
+    handleConfirmClick(false);
+    handleCardClick(null);
   };
 
   return (
