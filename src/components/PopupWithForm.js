@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 export const PopupWithForm = ({
-  name, title, isOpen, onClose, children, buttonText,
+  name, title, isOpen, onClose, children, buttonText, onSubmit
 }) => (
   <div className={classNames('popup', `'popup_type_${name}`, { popup_opened: isOpen })}>
     <div className="popup__container">

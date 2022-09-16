@@ -3,6 +3,7 @@ import { useEffect, useState} from 'react';
 import { Header } from './Header.js';
 import { Main } from './Main.js';
 import { Footer } from './Footer.js';
+import { EditProfilePopup } from "./EditProfilePopup";
 import { PopupWithForm } from './PopupWithForm.js';
 import { ImagePopup } from './ImagePopup.js';
 import {api} from "../utils/api";
@@ -44,42 +45,8 @@ function App() {
         onCardClick={handleCardClick}
       />
       <Footer />
-      <PopupWithForm
-        name="edit"
-        title="Редактировать профиль"
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-        buttonText="Сохранить"
-      >
-        <fieldset className="form__fields">
-          <label className="form__input">
-            <input
-              id="name-input"
-              type="text"
-              name="name"
-              placeholder="Имя"
-              className="form__field form__field_type_name"
-              minLength="2"
-              maxLength="40"
-              required
-            />
-            <span className="form__field-error name-input-error" />
-          </label>
-          <label className="form__input">
-            <input
-              id="about-input"
-              type="text"
-              name="about"
-              placeholder="О себе"
-              className="form__field form__field_type_about"
-              minLength="2"
-              maxLength="200"
-              required
-            />
-            <span className="form__field-error about-input-error" />
-          </label>
-        </fieldset>
-      </PopupWithForm>
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+
       <PopupWithForm
         name="add"
         title="Новое место"

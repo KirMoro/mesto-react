@@ -24,6 +24,25 @@ export const Main = ({
       });
   }, []);
 
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUserContext._id);
+
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+function handleCardDelete(card) {
+  api.deleteCard(card._id)
+    .then((deleteCard) => {
+      setCards((state) => state.filter((c) => c._id !== card._id ));
+    })
+}
+
   return (
     <main className="content">
       <section className="profile">
@@ -58,6 +77,8 @@ export const Main = ({
             key={(card._id)}
             card={card}
             onCardClick={onCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
         ))}
       </section>
