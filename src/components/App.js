@@ -1,12 +1,23 @@
 import '../pages/index.css';
-import { useState } from 'react';
+import { useEffect, useState} from 'react';
 import { Header } from './Header.js';
 import { Main } from './Main.js';
 import { Footer } from './Footer.js';
 import { PopupWithForm } from './PopupWithForm.js';
 import { ImagePopup } from './ImagePopup.js';
+import {api} from "../utils/api";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({});
+  useEffect(() => {
+    api.getProfileInfo()
+      .then((userData) => setCurrentUser(userData))
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const [isEditProfilePopupOpen, handleEditProfileClick] = useState(false);
   const [isAddPlacePopupOpen, handleAddPlaceClick] = useState(false);
   const [isEditAvatarPopupOpen, handleEditAvatarClick] = useState(false);
@@ -22,6 +33,8 @@ function App() {
   };
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
+
     <div className="page">
       <Header />
       <Main
@@ -137,6 +150,7 @@ function App() {
         onClose={closeAllPopups}
       />
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 

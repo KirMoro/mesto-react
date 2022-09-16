@@ -1,4 +1,17 @@
-export const Card = ({ onCardClick, card: { name, link, likes } }) => {
+import {useContext} from "react";
+import classNames from 'classnames';
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
+
+export const Card = ({ onCardClick, card: { name, link, likes, owner } }) => {
+  const currentUserContext = useContext(CurrentUserContext);
+
+  const isOwn = owner._id === currentUserContext._id;
+  console.log(isOwn)
+
+  const cardDeleteButtonClassName = (
+    `elements__trash-button ${isOwn ? 'elements__trash-button_visible' : ''}`
+  );
+
   function handleClick() {
     onCardClick(link);
   }
@@ -11,7 +24,7 @@ export const Card = ({ onCardClick, card: { name, link, likes } }) => {
         <button type="button" className="elements__like-button" aria-label="Понравилось" />
         <span className="elements__like-counter">{likes.length}</span>
       </div>
-      <button type="button" className="elements__trash-button" aria-label="Корзина" />
+      <button type="button" className={cardDeleteButtonClassName} aria-label="Корзина" />
     </article>
   );
 };

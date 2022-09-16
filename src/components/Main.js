@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { api } from '../utils/api';
 import { Card } from './Card';
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 export const Main = ({
   onEditProfile, onAddPlace, onEditAvatar, onCardClick,
 }) => {
-  const [userName, setName] = useState("");
-  const [userDescription, setDescription] = useState("");
-  const [userAvatar, setAvatar] = useState("");
+  const currentUserContext = useContext(CurrentUserContext);
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -18,9 +17,6 @@ export const Main = ({
 
     initialPromises
       .then(([profile, cardsInfo]) => {
-        setName(profile.name);
-        setDescription(profile.about);
-        setAvatar(profile.avatar);
         setCards(cardsInfo);
       })
       .catch((err) => {
@@ -33,7 +29,7 @@ export const Main = ({
       <section className="profile">
         <div
           className="profile__avatar"
-          style={{ backgroundImage: `url(${userAvatar})` }}
+          style={{ backgroundImage: `url(${currentUserContext.avatar})` }}
         />
         <button
           type="button"
@@ -41,8 +37,8 @@ export const Main = ({
           aria-label="Редактировать"
           onClick={onEditAvatar}
         />
-        <h1 className="profile__title">{userName}</h1>
-        <p className="profile__subtitle">{userDescription}</p>
+        <h1 className="profile__title">{currentUserContext.name}</h1>
+        <p className="profile__subtitle">{currentUserContext.about}</p>
         <button
           type="button"
           className="profile__edit-button"
