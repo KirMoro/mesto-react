@@ -8,7 +8,7 @@ export const PopupWithForm = ({
       <h3 className="popup__title">{title}</h3>
       <form name={`form-${name}`} className="form form_type_edit" noValidate>
         {children}
-        <button type="submit" className="form__submit-button" aria-label={buttonText}>
+        <button type="submit" onClick={onSubmit} className="form__submit-button" aria-label={buttonText}>
           {buttonText}
         </button>
       </form>

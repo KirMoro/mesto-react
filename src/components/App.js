@@ -4,6 +4,8 @@ import { Header } from './Header.js';
 import { Main } from './Main.js';
 import { Footer } from './Footer.js';
 import { EditProfilePopup } from "./EditProfilePopup";
+import { EditAvatarPopup } from "./EditAvatarPopup";
+
 import { PopupWithForm } from './PopupWithForm.js';
 import { ImagePopup } from './ImagePopup.js';
 import {api} from "../utils/api";
@@ -33,6 +35,27 @@ function App() {
     handleCardClick(null);
   };
 
+  function handleUpdateUser(userData) {
+    api.setProfileInfo(userData)
+      .then((userData) => {
+        console.log(userData)
+        setCurrentUser(userData)
+      } )
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => closeAllPopups())
+  }
+
+  function handleUpdateAvatar(userAvatar) {
+    api.setProfileAvatar(userAvatar)
+      .then((userData) => setCurrentUser(userData))
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => closeAllPopups())
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
 
@@ -45,8 +68,16 @@ function App() {
         onCardClick={handleCardClick}
       />
       <Footer />
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
-
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdateUser={handleUpdateUser}
+      />
+      <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        onUpdateAvatar={handleUpdateAvatar}
+      />
       <PopupWithForm
         name="add"
         title="Новое место"
@@ -78,27 +109,6 @@ function App() {
               required
             />
             <span className="form__field-error url-input-error" />
-          </label>
-        </fieldset>
-      </PopupWithForm>
-      <PopupWithForm
-        name="add-avatar"
-        title="Обновить аватар"
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-        buttonText="Сохранить"
-      >
-        <fieldset className="form__fields">
-          <label className="form__input">
-            <input
-              id="url-avatar-input"
-              type="url"
-              name="avatar"
-              placeholder="Ссылка на картинку"
-              className="form__field form__field_type_link"
-              required
-            />
-            <span className="form__field-error url-avatar-input-error" />
           </label>
         </fieldset>
       </PopupWithForm>
