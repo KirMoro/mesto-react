@@ -5,15 +5,21 @@ import { Main } from './Main.js';
 import { Footer } from './Footer.js';
 import { EditProfilePopup } from "./EditProfilePopup";
 import { EditAvatarPopup } from "./EditAvatarPopup";
-import { PopupWithForm } from './PopupWithForm.js';
 import {AddPlacePopup} from "./AddPlacePopup";
 import { ImagePopup } from './ImagePopup.js';
 import {api} from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import {ConfirmDeletePopup} from "./ConfirmDeletePopup";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+
+  const [isEditProfilePopupOpen, handleEditProfileClick] = useState(false);
+  const [isAddPlacePopupOpen, handleAddPlaceClick] = useState(false);
+  const [isEditAvatarPopupOpen, handleEditAvatarClick] = useState(false);
+  const [isConfirmPopupOpen, handleConfirmClick] = useState(false);
+  const [selectedCard, handleCardClick] = useState(null);
 
   useEffect(() => {
     const initialPromises = Promise.all([
@@ -31,12 +37,6 @@ function App() {
       });
   }, []);
 
-  const [isEditProfilePopupOpen, handleEditProfileClick] = useState(false);
-  const [isAddPlacePopupOpen, handleAddPlaceClick] = useState(false);
-  const [isEditAvatarPopupOpen, handleEditAvatarClick] = useState(false);
-  const [isConfirmPopupOpen, handleConfirmClick] = useState(false);
-  const [selectedCard, handleCardClick] = useState(null);
-
   const closeAllPopups = () => {
     handleEditProfileClick(false);
     handleAddPlaceClick(false);
@@ -44,7 +44,6 @@ function App() {
     handleConfirmClick(false);
     handleCardClick(null);
   };
-
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUserContext._id);
@@ -63,13 +62,16 @@ function App() {
       .then((deleteCard) => {
         setCards((state) => state.filter((c) => c._id !== card._id ));
       })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function handleUpdateUser(userData) {
     api.setProfileInfo(userData)
       .then((userData) => {
         setCurrentUser(userData)
-      } )
+      })
       .catch((err) => {
         console.log(err);
       })
@@ -126,17 +128,11 @@ function App() {
         onClose={closeAllPopups}
         onAddPlace={handleAddPlaceSubmit}
       />
-
-      <PopupWithForm
-        name="confirm"
-        title="Вы уверены?"
-        isOpen={isConfirmPopupOpen}
-        onClose={closeAllPopups}
-        buttonText="Да"
-      >
-        <fieldset className="form__fields">
-        </fieldset>
-      </PopupWithForm>
+      {/*<ConfirmDeletePopup*/}
+      {/*  isOpen={isConfirmPopupOpen}*/}
+      {/*  onClose={closeAllPopups}*/}
+      {/*  onDeletePlace={handleCardDelete}*/}
+      {/*/>*/}
       <ImagePopup
         card={selectedCard}
         onClose={closeAllPopups}

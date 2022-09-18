@@ -1,5 +1,5 @@
 import { PopupWithForm } from "./PopupWithForm";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
   const [name, setName] = useState('');
@@ -21,6 +21,11 @@ export const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
       link,
     });
   }
+
+  useEffect(() => {
+    setName('');
+    setLink('');
+  }, [isOpen]);
 
   return (
     <PopupWithForm
