@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Card } from './Card';
-import {CurrentUserContext} from "../contexts/CurrentUserContext";
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export const Main = ({
-  onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardDelete, onCardLike
+  onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardDelete, onCardLike, onTrashClick,
 }) => {
   const currentUserContext = useContext(CurrentUserContext);
 
@@ -43,6 +43,7 @@ export const Main = ({
             onCardClick={onCardClick}
             onCardLike={onCardLike}
             onCardDelete={onCardDelete}
+            onTrashClick={onTrashClick}
           />
         ))}
       </section>

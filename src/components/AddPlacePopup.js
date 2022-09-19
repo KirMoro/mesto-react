@@ -1,7 +1,7 @@
-import { PopupWithForm } from "./PopupWithForm";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from 'react';
+import { PopupWithForm } from './PopupWithForm';
 
-export const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
+export const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
   const [name, setName] = useState('');
   const [link, setLink] = useState('');
 
@@ -50,7 +50,7 @@ export const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
             value={name}
             onChange={handleNameChange}
           />
-          <span className="form__field-error title-input-error"/>
+          <span className="form__field-error title-input-error" />
         </label>
         <label className="form__input">
           <input
@@ -63,9 +63,9 @@ export const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
             value={link}
             onChange={handleLinkChange}
           />
-          <span className="form__field-error url-input-error"/>
+          <span className="form__field-error url-input-error" />
         </label>
       </fieldset>
     </PopupWithForm>
-  )
-}
+  );
+};

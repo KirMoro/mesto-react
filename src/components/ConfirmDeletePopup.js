@@ -1,11 +1,12 @@
-import { PopupWithForm } from "./PopupWithForm";
+import { PopupWithForm } from './PopupWithForm';
 
-export const ConfirmDeletePopup = ({isOpen, onClose, onDeletePlace }) => {
-
+export const ConfirmDeletePopup = ({
+  isOpen, onClose, onDeletePlace, deleteCard,
+}) => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    onDeletePlace(card);
+    onDeletePlace(deleteCard);
   }
 
   return (
@@ -17,8 +18,7 @@ export const ConfirmDeletePopup = ({isOpen, onClose, onDeletePlace }) => {
       onSubmit={handleSubmit}
       buttonText="Да"
     >
-      <fieldset className="form__fields">
-      </fieldset>
+      <fieldset className="form__fields" />
     </PopupWithForm>
-  )
-}
+  );
+};

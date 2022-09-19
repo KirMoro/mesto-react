@@ -1,7 +1,9 @@
-import {useContext} from "react";
-import {CurrentUserContext} from "../contexts/CurrentUserContext";
+import { useContext } from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-export const Card = ({ onCardClick, onCardLike, onCardDelete, card }) => {
+export const Card = ({
+  onCardClick, onCardLike, onCardDelete, card, onTrashClick,
+}) => {
   const currentUserContext = useContext(CurrentUserContext);
 
   const isOwn = card.owner._id === currentUserContext._id;
@@ -9,9 +11,9 @@ export const Card = ({ onCardClick, onCardLike, onCardDelete, card }) => {
     `elements__trash-button ${isOwn ? 'elements__trash-button_visible' : ''}`
   );
 
-  const isLiked = card.likes.some(item => item._id === currentUserContext._id)
+  const isLiked = card.likes.some((item) => item._id === currentUserContext._id);
   const cardLikeButtonClassName = (
-    `elements__like-button ${isLiked ?'elements_like-button_active' : ''}`
+    `elements__like-button ${isLiked ? 'elements_like-button_active' : ''}`
   );
 
   function handleClick() {
@@ -23,7 +25,9 @@ export const Card = ({ onCardClick, onCardLike, onCardDelete, card }) => {
   }
 
   function handleDeleteClick() {
-    onCardDelete(card)
+    onTrashClick(true);
+
+    onCardDelete(card);
   }
 
   return (
@@ -37,5 +41,4 @@ export const Card = ({ onCardClick, onCardLike, onCardDelete, card }) => {
       <button type="button" className={cardDeleteButtonClassName} onClick={() => handleDeleteClick()} aria-label="Корзина" />
     </article>
   );
-}
-
+};
